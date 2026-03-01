@@ -1,0 +1,36 @@
+#!/bin/bash
+# Usage: curli [options] [URL] like curl, but it will randomly select one of the curl-impersonate binaries to execute.
+
+# To set up:
+# sudo cp ./curli /usr/local/bin
+# sudo chmod +x /usr/local/bin/curli
+
+# node.js example:
+# import { x } from "tinyexec";
+# const marker = "__HTTP_STATUS_CODE__:";
+# const output = await x("curli", ["-L", "-sS", "-o", "-", "-w", `\\n${marker}%{http_code}`, url], {
+# throwOnError: false
+# });
+
+# 1. Define the directory containing your curl-impersonate binaries
+BIN_DIR="./curli-bin"
+
+# 2. Find all files starting with "curl_" and put them in an array
+# We use 'ls -1' to get a clean list of filenames
+binaries=($(ls -1 "$BIN_DIR"/curl_* 2>/dev/null))
+
+# 3. Check if we actually found any binaries
+if [ ${#binaries[@]} -eq 0 ]; then
+    echo "Error: No binaries starting with 'curl_' found in $BIN_DIR"
+    exit 1
+fi
+
+# 4. Pick a random index from the array
+random_index=$(( RANDOM % ${#binaries[@]} ))
+selected_bin="${binaries[$random_index]}"
+
+# 5. Optional: Print which browser is being used (useful for debugging)
+# echo "Using: $(basename "$selected_bin")" >&2
+
+# 6. Execute the selected binary with all passed arguments
+"$selected_bin" "$@"

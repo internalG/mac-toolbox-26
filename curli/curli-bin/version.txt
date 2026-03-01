@@ -1,0 +1,4 @@
+curl-impersonate-v1.4.3.arm64-macos
+20260206
+https://github.com/lexiforest/curl-impersonate
+https://github.com/lexiforest/curl-impersonate/releases/tag/v1.4.3
