@@ -1,0 +1,6 @@
+Clash-SpeedTest
+clash-speedtest version 1.8.6
+20260211
+https://github.com/faceair/clash-speedtest
+
+clash-speedtest -c "https://domain.com/api/v1/client/subscribe?token=secret&flag=meta" -output tested-proxy.yaml

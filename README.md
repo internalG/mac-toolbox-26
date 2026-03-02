@@ -3,3 +3,5 @@ Personal app, cli and script since 2026
 
 ## curli
 curl-impersonate
+
+## clash-speedtest
